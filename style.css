@@ -1,0 +1,87 @@
+@font-face {
+    font-family:'Inconsolata';
+    src:URL('Inconsolata.otf');
+  }
+  
+html
+{
+    text-align:center;
+    font-family:'Inconsolata';
+    background-color:#322947;
+    color:white;
+}
+body
+{
+    margin:0.5em;
+}
+button
+{
+    border:0;
+    background-color:#ff6b97;
+    border-radius:1em;
+    font-size:150%;
+    text-align:center;
+    margin:0.25em;
+}
+button:disabled
+{
+    background-color:#4b5bab;
+    color:black;
+}
+button:enabled
+{
+    cursor:pointer;
+}
+h1
+{
+    color:#ff6b97;
+}
+h3, h4
+{
+    color:#ffe478;
+    font-size:150%;
+}
+h1, h2, h3, h4
+{
+    margin:0.25em;
+}
+hr
+{
+    border-color:#ff6b97;
+}
+.scary
+{
+    color:#4da6ff;
+}
+.generator_box
+{
+    border: 0.1em solid;
+    width:20%;
+    display:inline-block;
+    padding:1em;
+    border-radius:1em;
+}
+#title
+{
+    position:absolute;
+    text-align:left;
+}
+#alpha_box
+{
+    border-color: #4da6ff;
+}
+#beta_box
+{
+    border-color: #ff6b97;
+}
+#gamma_box
+{
+    border-color:#ffe478;
+}
+#blurb
+{
+    position: fixed;
+    left: 0;
+    bottom: 0.5em;
+    width: 100%;
+}
