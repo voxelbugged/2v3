@@ -10,6 +10,10 @@
     <script src="game.js" defer></script>
 </head>
 <body>
+    <div id="ticker">
+        <marquee>BREAKING NEWS: This is a news ticker.</marquee>
+    </div>
+    <hr>
     <h1 id="title"><a style="color:#4da6ff"><u>2</u></a><u>v</u><a style="color:#ffe478"><u>3</u></a></h1>
     <h2>You have <a id="thingies_counter">THINGIES</a> thingies.</h2>
     You are making <a id="thingies_per_second">PERSECOND</a> thingies per second. <a id="thingies_per_second_exponential" class="scary">(2^0 * 1)</a><br>
@@ -19,28 +23,41 @@
     <button id="evolution_button" onclick="evolve()">Evolve!</button><br>
     Evolving resets your thingies, but keeps everything else.
     <hr>
-    <h3>Generators</h3>
-    Generators multiply your thingy production by their level. <br><br>
-    <div class="generator_box" id="alpha_box">
-    <h4>Generator Alpha</h4>
-    Level: <a id="generator_alpha_level">ALEVEL</a> <br>
-    Cost: <a id="generator_alpha_cost">ACOST</a> <a class="scary">(4^(4+lvl))</a> <br>
-    <button id="buy_alpha" onclick="upgrade_generator(1)">Level up!</button><br>
+    <div id="tabswitch">
+        <button class="tab" onclick="openTab(event, 'generator_tab')" id="default_open">Generators</button><button class="tab" disabled>???????</button><button class="tab" disabled>??????????</button><button class="tab" onclick="openTab(event, 'settings_tab')">Settings</button>
     </div>
-    <div class="generator_box" id="beta_box">
-    <h4>Generator Beta</h4>
-    Level: <a id="generator_beta_level">BLEVEL</a> <br>
-    Cost: <a id="generator_beta_cost">BCOST</a> <a class="scary">(5^(5+lvl))</a> <br>
-    <button id="buy_beta" onclick="upgrade_generator(2)">Level up!</button>
-    </div>
-    <div class="generator_box" id="gamma_box">
-    <h4>Generator Gamma</h4>
-    Level: <a id="generator_gamma_level">CLEVEL</a> <br>
-    Cost: <a id="generator_gamma_cost">CCOST</a> <a class="scary">(6^(6+lvl))</a> <br>
-    <button id="buy_gamma" onclick="upgrade_generator(3)">Level up!</button>
+    <div id="generator_tab" class="tabcontent">
+        Generators multiply your thingy production by their level. <br><br>
+        <div class="generator_box" id="alpha_box">
+        <h4>Generator Alpha</h4>
+        Level: <a id="generator_alpha_level">ALEVEL</a> <br>
+        Cost: <a id="generator_alpha_cost">ACOST</a> <a class="scary">(4^(4+lvl))</a> <br>
+        <button id="buy_alpha" onclick="upgrade_generator(1)">Level up!</button><br>
+        </div>
+        <div class="generator_box" id="beta_box">
+        <h4>Generator Beta</h4>
+        Level: <a id="generator_beta_level">BLEVEL</a> <br>
+        Cost: <a id="generator_beta_cost">BCOST</a> <a class="scary">(5^(5+lvl))</a> <br>
+        <button id="buy_beta" onclick="upgrade_generator(2)">Level up!</button>
+        </div>
+        <div class="generator_box" id="gamma_box">
+        <h4>Generator Gamma</h4>
+        Level: <a id="generator_gamma_level">CLEVEL</a> <br>
+        Cost: <a id="generator_gamma_cost">CCOST</a> <a class="scary">(6^(6+lvl))</a> <br>
+        <button id="buy_gamma" onclick="upgrade_generator(3)">Level up!</button>
     </div><br><br>
-    <input type="checkbox" id="scary_toggle" onclick="showScary()"> Show formulas <br>
-    <button id="delete_save" onclick="reset()">Delete save</button>
-    <div id="blurb">a voxelbugged production - v0.1</div>
+    </div>
+    <div id="settings_tab" class="tabcontent">
+        <input type="checkbox" id="scary_toggle" onclick="showScary()"> Show formulas <br>
+        <button id="delete_save" onclick="reset()">Delete save</button>
+        <div id="hotkey_board">
+            <h4>Hotkeys</h4>
+            E - Evolve <br>
+            1 - Buy Alpha <br>
+            2 - Buy Beta<br>
+            3 - Buy Gamma
+        </div>
+    </div>
+    <div id="blurb">a voxelbugged production - v0.1.1</div>
 </body>
 </html>

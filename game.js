@@ -12,7 +12,7 @@ var scaryMath = document.getElementsByClassName("scary");
 function update_thingies()
 {
     document.getElementById("thingies_counter").innerHTML = thingies.toPrecision(3);
-    if(thingies < evolutionGoal)
+    if(thingies <= evolutionGoal)
     {
         document.getElementById("evolution_button").setAttribute("disabled", "disabled");
     }
@@ -20,7 +20,7 @@ function update_thingies()
     {
         document.getElementById("evolution_button").removeAttribute("disabled");
     }
-    if(thingies < generatorBetaCost)
+    if(thingies <= generatorBetaCost)
     {
         document.getElementById("buy_beta").setAttribute("disabled", "disabled");
     }
@@ -28,7 +28,7 @@ function update_thingies()
     {
         document.getElementById("buy_beta").removeAttribute("disabled");
     }
-    if(thingies < generatorGammaCost)
+    if(thingies <= generatorGammaCost)
     {
         document.getElementById("buy_gamma").setAttribute("disabled", "disabled");
     }
@@ -36,7 +36,7 @@ function update_thingies()
     {
         document.getElementById("buy_gamma").removeAttribute("disabled");
     }
-    if(thingies < generatorAlphaCost)
+    if(thingies <= generatorAlphaCost)
     {
         document.getElementById("buy_alpha").setAttribute("disabled", "disabled");
     }
@@ -53,11 +53,14 @@ function update_per_second()
 
 function evolve()
 {
-    x+=1;
-    update_per_second();
-    evolutionGoal = 3**x;
-    thingies = 0;
-    update_indicators();
+    if(thingies >= evolutionGoal)
+    {
+        x+=1;
+        update_per_second();
+        evolutionGoal = 3**x;
+        thingies = 0;
+        update_indicators();
+    }
 }
 
 function update_indicators()
@@ -82,21 +85,30 @@ function upgrade_generator(which)
 {
     if(which == 1)
     {
-        thingies -= generatorAlphaCost;
-        generatorAlphaLevel++;
-        generatorAlphaCost = 4**(4+generatorAlphaLevel);
+        if(thingies >= generatorAlphaCost)
+        {
+            thingies -= generatorAlphaCost;
+            generatorAlphaLevel++;
+            generatorAlphaCost = 4**(4+generatorAlphaLevel);
+        }
     }
     if(which == 2)
     {
-        thingies -= generatorBetaCost;
-        generatorBetaLevel++;
-        generatorBetaCost = 5**(5+generatorBetaLevel);
+        if(thingies >= generatorBetaCost)
+        {
+            thingies -= generatorBetaCost;
+            generatorBetaLevel++;
+            generatorBetaCost = 5**(5+generatorBetaLevel);
+        }
     }
     if(which == 3)
     {
-        thingies -= generatorGammaCost;
-        generatorGammaLevel++;
-        generatorGammaCost = 6**(6+generatorGammaLevel);
+        if(thingies >= generatorGammaCost)
+        {
+            thingies -= generatorGammaCost;
+            generatorGammaLevel++;
+            generatorGammaCost = 6**(6+generatorGammaLevel);
+        }
     }
     update_per_second();
     update_indicators();
@@ -122,6 +134,23 @@ function showScary()
         }
     }
 }
+
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tab");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  } 
 
 function save()
 {
@@ -166,8 +195,38 @@ update_per_second();
 update_indicators();
 
 window.setInterval(function(){
-    thingies += thingiesPerSecond/100;
+    if (document.visibilityState == "visible")
+    {
+        thingies += thingiesPerSecond/100;
+    }
+    else
+    {
+        thingies += thingiesPerSecond;
+    }
     update_thingies();
+    document.title = '2v3 - ' + thingies.toPrecision(3) + ' thingies';  
 }, 10);
 
 var saveInterval = window.setInterval(save, 1000);
+
+document.getElementById("default_open").click();
+
+document.addEventListener("keydown", function onEvent(event)
+{
+    if (event.key == "e") 
+    {
+        evolve();
+    }
+    else if (event.key == "1")
+    {
+       upgrade_generator(1);
+    }
+    else if (event.key == "2")
+    {
+       upgrade_generator(2);
+    }
+    else if (event.key == "3")
+    {
+       upgrade_generator(3);
+    }
+});

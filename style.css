@@ -9,9 +9,6 @@ html
     font-family:'Inconsolata';
     background-color:#322947;
     color:white;
-}
-body
-{
     margin:0.5em;
 }
 button
@@ -22,6 +19,10 @@ button
     font-size:150%;
     text-align:center;
     margin:0.25em;
+}
+button:hover
+{
+    background-color:#ffb5b5;
 }
 button:disabled
 {
@@ -60,6 +61,32 @@ hr
     display:inline-block;
     padding:1em;
     border-radius:1em;
+}
+.tab
+{
+    background-color: #322947;
+    color: #ffe478;
+    border: 0.1em #4da6ff solid;
+    margin: 0.25em;
+    border-radius:0.25em;
+}
+.tab:hover
+{
+    background-color:#473b78;
+}
+.tab:disabled
+{
+    background-color:#322947;
+    color:#7e7e8f;
+    border-color:#7e7e8f;
+}
+.tab.active
+{
+    border-color:#ffe478;
+}
+.tabcontent
+{
+    display:none;
 }
 #title
 {
